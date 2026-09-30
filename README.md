@@ -34,7 +34,7 @@ The skill can then be invoked explicitly as `$nexusecore-ui-ux` or selected auto
 From the frontend repository root:
 
 ```powershell
-pwsh -File "$env:USERPROFILE\.codex\skills\nexusecore-ui-ux\scripts\audit-ui.ps1" -FrontendPath .
+pwsh -File "$env:USERPROFILE\nexusecore-ui-ux\scripts\audit-ui.ps1" -FrontendPath .
 ```
 
 Use `-Strict` in CI when the team is ready to treat findings as a blocking quality gate. The audit is intentionally advisory by default and never rewrites source files.
