@@ -1,0 +1,4 @@
+interface:
+  display_name: "NexuseCore UI/UX"
+  short_description: "ERP UI/UX quality gate for NexusCore"
+  default_prompt: "Use the NexuseCore UI/UX quality gate for this frontend task."
