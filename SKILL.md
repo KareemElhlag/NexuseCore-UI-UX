@@ -5,10 +5,12 @@ metadata:
   short-description: NexusCore ERP UI/UX quality gate
   author: "Karim (KaReem Elhlag) Abdelhady"
   project: "NexuseCore-ui-ux"
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # NexuseCore UI/UX
+
+> v2.1.0 adds the mandatory **Senior Monitor** post-work UX certification stage.
 
 > Maintained and authored by **Karim (KaReem Elhlag) Abdelhady** for the NexuseCore UI/UX component and workflow standard.
 
@@ -97,6 +99,13 @@ If one contract row is missing, report the gap instead of calling the feature co
 - Prefer one drawer/modal/table/form primitive with variants over several visually similar implementations.
 - Motion is a shared behavior: use short tokenized transitions, preserve layout stability, and disable non-essential motion under `prefers-reduced-motion`.
 - Every new primitive must document its intended use, forbidden uses, responsive behavior, and RTL behavior in the component creator record.
+
+## Senior Monitor (mandatory post-work certification)
+
+After implementation and normal review, run `scripts/senior-monitor-ui.ps1` and complete `SENIOR_MONITOR.md`.
+Do not report the workflow complete until the UX certification decision is `CERTIFIED` or
+`CERTIFIED_WITH_RESIDUE`. The monitor re-checks the user job, data contract, states, shared components, accessibility,
+RTL, responsive behavior, performance, permissions, and browser evidence.
 
 ## Scripts
 

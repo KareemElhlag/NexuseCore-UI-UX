@@ -1,9 +1,12 @@
-# NexuseCore-ui-ux v2.0.0
+# NexuseCore-ui-ux v2.1.0
 
 Reusable UI/UX engineering skill for NexusCore ERP and other RTL operational interfaces.
 
 **Author and maintainer:** Karim (KaReem Elhlag) Abdelhady  
-**Version:** 2.0.0
+**Version:** 2.1.0
+
+The post-work `Senior Monitor` stage certifies UX workflow, accessibility, RTL, responsive behavior, component
+consistency, data readback, and performance evidence before completion.
 
 ## Purpose
 
