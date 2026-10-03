@@ -1,9 +1,9 @@
-# NexuseCore-ui-ux
+# NexuseCore-ui-ux v2.0.0
 
 Reusable UI/UX engineering skill for NexusCore ERP and other RTL operational interfaces.
 
 **Author and maintainer:** Karim (KaReem Elhlag) Abdelhady  
-**Version:** 1.0.0
+**Version:** 2.0.0
 
 ## Purpose
 
@@ -17,6 +17,10 @@ It is designed to reduce visual drift, duplicated components, disconnected butto
 - `references/quality-gate.md`: detailed review criteria for substantial UI work.
 - `references/component-creator.md`: contract for creating and promoting reusable components.
 - `scripts/audit-ui.ps1`: advisory consistency audit for a React frontend.
+- `references/ux-workflow-v2.md`: user-job, state, contract, and verification workflow.
+- `references/performance.md`: frontend UX performance budgets and baseline/delta record.
+- `roles/`: scoped frontend architecture, UX governance, and UI platform/security roles.
+- `scripts/ux-v2-check.ps1`: deterministic skill-package and UX-record shape check.
 - `agents/openai.yaml`: display metadata for Codex skill discovery.
 
 ## Installation

@@ -5,7 +5,7 @@ metadata:
   short-description: NexusCore ERP UI/UX quality gate
   author: "Karim (KaReem Elhlag) Abdelhady"
   project: "NexuseCore-ui-ux"
-  version: "1.0.0"
+  version: "2.0.0"
 ---
 
 # NexuseCore UI/UX
@@ -43,6 +43,10 @@ For any non-trivial screen or workflow, follow this order and keep the scope bou
 5. **Implement the smallest composable surface:** reuse existing primitives and tokens. Add a shadcn primitive only when an existing equivalent is absent; do not introduce a new wrapper for a one-off visual.
 6. **Verify the real workflow:** test the route, permission, mutation, refresh/readback, keyboard flow, RTL layout, and mobile layout. Source inspection alone is not completion evidence.
 7. **Run the consistency audit:** run `scripts/audit-ui.ps1` against the frontend. Treat duplicate primitives, feature-local copies of shared controls, missing reduced-motion handling for custom animation, and non-token colors as review findings.
+
+8. **Run the UX performance loop:** use [references/ux-workflow-v2.md](references/ux-workflow-v2.md) to record the
+   user job, route/data owner, interaction states, and browser evidence. Use [references/performance.md](references/performance.md)
+   for a baseline and changed measurement; do not optimize from intuition alone.
 
 ## Operating rules
 
@@ -108,6 +112,21 @@ If one contract row is missing, report the gap instead of calling the feature co
 - Do not create a design-system abstraction until at least two real surfaces need it.
 - Report verification evidence and remaining visual debt briefly.
 
+## v2 role routing
+
+Select one primary role by the files and risk actually touched, then consult the other role when the change crosses
+their boundary:
+
+- [roles/frontend-architect.md](roles/frontend-architect.md): React, TypeScript, API state, browser performance, and
+  security boundaries.
+- [roles/ux-governance-reviewer.md](roles/ux-governance-reviewer.md): user jobs, information architecture, interaction
+  states, accessibility, RTL, responsive behavior, and review/acceptance control.
+- [roles/ui-platform-engineer.md](roles/ui-platform-engineer.md): shared components, shadcn/ui, tokens, rendering
+  performance, visual consistency, and maintainable implementation.
+
+All roles are software architecture/design and security-aware roles. Route by evidence, not by the screen's name. If a
+role is not applicable, record why; do not load every reference for a small visual change.
+
 ## Required result
 
 Before calling a UI task complete, confirm:
@@ -119,5 +138,7 @@ Before calling a UI task complete, confirm:
 - Shared components remain reusable and the change does not silently bypass permissions.
 - TypeScript and focused UI tests pass; browser evidence is included when the task changes layout or interaction.
 - The workflow contract above is satisfied, or every remaining gap is explicitly reported.
+- A v2 UX record contains baseline/changed measurements, the route/data owner, the state matrix, and the remaining
+  visual debt with a decision: `ACCEPTED`, `ACCEPTED WITH FOLLOW-UP`, `REJECTED`, or `BLOCKED`.
 
 For detailed review criteria, read [references/quality-gate.md](references/quality-gate.md).
