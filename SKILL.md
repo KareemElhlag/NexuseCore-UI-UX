@@ -14,7 +14,16 @@ metadata:
 
 > Maintained and authored by **Karim (KaReem Elhlag) Abdelhady** for the NexuseCore UI/UX component and workflow standard.
 
-This skill is intentionally independent from backend architecture skills. It can be used on its own for frontend audits and implementation, or alongside an engineering/DDD skill when the workflow crosses API, tenancy, permissions, or persistence boundaries.
+This skill remains independently usable for frontend-only work, and has a defined collaboration mode with
+`kmg-agent-skill`: for NexusCore feature work, load both skills when the change crosses data, API, tenancy,
+permissions, persistence, runtime, or workflow boundaries. KMG owns engineering evidence and runtime truth;
+this skill owns UX, accessibility, RTL, responsive behavior, and visual evidence.
+
+## Required closing report
+
+Every completed task must end with three explicit lines: **تم إنجازه** (implemented and verified),
+**تم تحسينه** (quality, UX, performance, or maintenance improvements), and **المتبقي** (known gaps,
+unverified areas, and the next highest-value improvement). Never mark an item verified without evidence.
 
 Build interfaces that are calm, clear, dense enough for ERP work, and easy to extend. This skill is independent: it does not require or invoke `kmg-agent-skill`.
 
@@ -102,14 +111,26 @@ If one contract row is missing, report the gap instead of calling the feature co
 
 ## Senior Monitor (mandatory post-work certification)
 
-After implementation and normal review, run `scripts/senior-monitor-ui.ps1` and complete `SENIOR_MONITOR.md`.
-Do not report the workflow complete until the UX certification decision is `CERTIFIED` or
-`CERTIFIED_WITH_RESIDUE`. The monitor re-checks the user job, data contract, states, shared components, accessibility,
-RTL, responsive behavior, performance, permissions, and browser evidence.
+After implementation and normal review, run `scripts/senior-monitor-ui.ps1 -FrontendPath <path>` and complete
+`SENIOR_MONITOR.md`. That script only proves its own mechanical pre-checks passed (structure present, the
+consistency audit ran clean) — it reports `MECHANICAL_CHECKS_PASSED` or `BLOCKED`, never `CERTIFIED` itself. The
+agent renders the real decision (`CERTIFIED` / `CERTIFIED_WITH_RESIDUE` / `REWORK_REQUIRED` / `BLOCKED`) by
+combining that mechanical result with its own judgment against the user job, data contract, states, shared
+components, accessibility, RTL, responsive behavior, performance, permissions, and browser evidence — none of
+which a script can evaluate — and states that decision explicitly in the closing report. Do not report the
+workflow complete until that decision is `CERTIFIED` or `CERTIFIED_WITH_RESIDUE`.
+
+This is a separate certification stage from kmg-agent-skill's own "Senior Monitor" (engineering/runtime
+certification): a combined backend+UI task needs both, run independently; a frontend-only task only has this one.
 
 ## Scripts
 
-- `scripts/audit-ui.ps1`: scans a frontend for duplicated primitive names, feature-local modal/drawer/button copies, hard-coded color values, and custom animation without a reduced-motion branch. It is advisory and produces findings; it never rewrites source.
+- `scripts/audit-ui.ps1 -FrontendPath <path> [-ReportCsv <path>] [-Strict]`: scans a frontend for duplicated
+  primitive names, feature-local modal/drawer/button copies, hard-coded color values, custom animation without a
+  reduced-motion branch, and dialog/modal markup with no visible focus-trap usage. It is advisory and produces
+  findings; it never rewrites source. It returns the findings as real objects on the pipeline (pipe it into
+  `Where-Object`/`Export-Csv`/another check) and also prints a full, non-truncated table to the host when run
+  directly — use `-ReportCsv` for a saved full-fidelity copy instead of relying on console width.
 - Run it from the repository root with `pwsh -File <skill>/scripts/audit-ui.ps1 -FrontendPath nexusecore-web`.
 - Use findings to decide whether to promote a component, compose an existing primitive, or document an intentional exception.
 
